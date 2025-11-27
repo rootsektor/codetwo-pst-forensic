@@ -1,0 +1,115 @@
+"""
+Configuration and constants for CodeTwo PST Forensic Tool
+"""
+from pathlib import Path
+
+# Version
+VERSION = "1.0.0"
+TOOL_NAME = "CodeTwo Backup PST Forensic Tool"
+
+# Script and DLL directories
+SCRIPT_DIR = Path(__file__).parent.resolve()  # classes/ directory
+PACKAGE_DIR = SCRIPT_DIR.parent.resolve()     # codetwo_pst_forensic/ directory
+DLL_DIR = PACKAGE_DIR / "dll"
+
+# Cryptographic constants (CodeTwo's encryption)
+MASTER_KEY = b'rtflhqo56djaepr4$%ui@12wdfgrpxc['
+MASTER_IV = b'^7_n-.C1Hcr5_.OO'
+
+# Custom Base32 alphabet used by CodeTwo
+CODETWO_ALPHABET = "1234567890ABCDEFGHIJKLMNPRSTUVXY"
+
+# EnumPropType values (from C2.Ews.Client.Abstractions.FTS)
+PT_UNSPECIFIED = 0
+PT_I2 = 2
+PT_I4 = 3
+PT_DOUBLE = 5
+PT_BOOLEAN = 11
+PT_OBJECT = 13
+PT_LONGLONG = 20
+PT_SYSTIME = 64
+PT_CLSID = 72
+PT_SVREID = 251
+PT_BINARY = 258
+PT_MV_I2 = 4098
+PT_MV_I4 = 4099
+PT_MV_LONGLONG = 4116
+PT_MV_CLSID = 4168
+PT_MV_BINARY = 4354
+PT_UNICODE = 33968
+PT_STRING = 34020
+PT_MV_UNICODE = 38064
+
+# MapiPropertyType enum values (from Aspose.Email)
+MAPI_PT_SHORT = 2
+MAPI_PT_LONG = 3
+MAPI_PT_DOUBLE = 5
+MAPI_PT_BOOLEAN = 11
+MAPI_PT_OBJECT = 13
+MAPI_PT_LONGLONG = 20
+MAPI_PT_UNICODE = 31
+MAPI_PT_SYSTIME = 64
+MAPI_PT_CLSID = 72
+MAPI_PT_SVREID = 251
+MAPI_PT_BINARY = 258
+MAPI_PT_STRING8 = 30
+MAPI_PT_MV_SHORT = 4098
+MAPI_PT_MV_LONG = 4099
+MAPI_PT_MV_LONGLONG = 4116
+MAPI_PT_MV_CLSID = 4168
+MAPI_PT_MV_BINARY = 4354
+MAPI_PT_MV_UNICODE = 4127
+
+# Map from FTS EnumPropType to MAPI PropertyType value
+PROP_TYPE_MAP = {
+    PT_I2: MAPI_PT_SHORT,
+    PT_I4: MAPI_PT_LONG,
+    PT_DOUBLE: MAPI_PT_DOUBLE,
+    PT_BOOLEAN: MAPI_PT_BOOLEAN,
+    PT_OBJECT: MAPI_PT_OBJECT,
+    PT_LONGLONG: MAPI_PT_LONGLONG,
+    PT_SYSTIME: MAPI_PT_SYSTIME,
+    PT_CLSID: MAPI_PT_CLSID,
+    PT_SVREID: MAPI_PT_SVREID,
+    PT_BINARY: MAPI_PT_BINARY,
+    PT_UNICODE: MAPI_PT_UNICODE,
+    PT_STRING: MAPI_PT_UNICODE,
+    PT_MV_I2: MAPI_PT_MV_SHORT,
+    PT_MV_I4: MAPI_PT_MV_LONG,
+    PT_MV_LONGLONG: MAPI_PT_MV_LONGLONG,
+    PT_MV_CLSID: MAPI_PT_MV_CLSID,
+    PT_MV_BINARY: MAPI_PT_MV_BINARY,
+    PT_MV_UNICODE: MAPI_PT_MV_UNICODE,
+}
+
+# Property IDs to skip (markers)
+SKIP_PROP_IDS = [16406, 14960]
+
+# Important MAPI Property IDs
+PR_SUBJECT = 0x0037
+PR_MESSAGE_FLAGS = 0x0E07
+PR_CLIENT_SUBMIT_TIME = 0x0039
+PR_MESSAGE_DELIVERY_TIME = 0x0E06
+PR_SENDER_NAME = 0x0C1A
+PR_SENDER_EMAIL = 0x0C1F
+PR_DISPLAY_TO = 0x0E04
+PR_DISPLAY_CC = 0x0E03
+PR_DISPLAY_BCC = 0x0E02
+PR_SMTP_ADDRESS = 0x39FE
+PR_DISPLAY_NAME = 0x3001
+PR_EMAIL_ADDRESS = 0x3003
+PR_RECIPIENT_TYPE = 0x0C15
+PR_INTERNET_MESSAGE_ID = 0x1035
+
+# Message flags
+MSGFLAG_READ = 0x0001
+
+# DateTime Property IDs - skip in copy_properties, handled separately
+DATETIME_PROP_IDS = [PR_MESSAGE_DELIVERY_TIME, PR_CLIENT_SUBMIT_TIME]
+
+# Required DLLs
+REQUIRED_DLLS = [
+    "System.Data.SqlServerCe.dll",
+    "Aspose.Email.dll",
+    "C2.Ews.Client.Abstractions.dll",
+]
