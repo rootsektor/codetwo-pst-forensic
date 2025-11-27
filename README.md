@@ -1,4 +1,4 @@
-# CodeTwo Backup PST Forensic Tool v1.0.0
+# CodeTwo Backup PST Forensic Tool
 
 **Rootsektor IT-Security GmbH** | [www.rootsektor.de](https://www.rootsektor.de)
 
