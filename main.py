@@ -30,9 +30,9 @@ if sys.platform == 'win32':
 # Add parent directory to path for imports
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
-from codetwo_pst_forensic.classes.config import VERSION
-from codetwo_pst_forensic.classes.banner import print_banner
-from codetwo_pst_forensic.classes.processor import MailboxProcessor, BatchProcessor
+from classes.config import VERSION
+from classes.banner import print_banner
+from classes.processor import MailboxProcessor, BatchProcessor
 
 
 def setup_logging(verbose: bool = False, log_file: Path = None):
